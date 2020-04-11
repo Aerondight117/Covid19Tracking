@@ -3,7 +3,7 @@
 <html>
   <head>
   
-    <link rel="stylesheet" type="text/css" href="mystyle.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
 
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
@@ -28,68 +28,65 @@
     <div id="map"></div>
     <script>
 
-    var xmlhttp = new XMLHttpRequest();
-
-    xmlhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        ontarioStats = JSON.parse(this.responseText);
-        
-      }
-    };
-    xmlhttp.open("GET", "ontario.php", true);
-    xmlhttp.send();
-
-    
-    xmlhttp = new XMLHttpRequest();
-
-    xmlhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        quebecStats = JSON.parse(this.responseText);
-        
-      }
-    };
-    xmlhttp.open("GET", "quebec.php", true);
-    xmlhttp.send();
+    var url1 = 'ontario.php';
+    var url2 = 'quebec.php';
+    var map;
 
 
 
-
-
-      function initMap() {
-        // Create the map.
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: {lat: 53.7609, lng: -98.8139},
-          mapTypeId: 'roadmap'
-        });
-
+    var ontarioStats = getStatsO(url1);
     
 
-        for (line in quebecStats) {
+    var quebecStats = getStatsQ(url2);
+
+
+    function getStatsQ(url){
+      fetch(url)
+        .then(res => res.json())
+        .then((out) => {
+          quebecStats = out;
+            drawCirclesQ(map);
+          })
+      .catch(err => { throw err });
+    };
+
+    function getStatsO(url){
+      fetch(url)
+        .then(res => res.json())
+        .then((out) => {
+            ontarioStats = out;
+            drawCirclesO(map);
+          })
+      .catch(err => { throw err });
+    };
+
+    function drawCirclesQ(map){
+      for (line in quebecStats) {
         
           
-          //set the variables 
-          var numberOfCases = quebecStats[line].number_of_cases;
-          var latitude = quebecStats[line].region_lat;
-          var longitude = quebecStats[line].region_long;
+        //set the variables 
+        var numberOfCases = quebecStats[line].number_of_cases;
+        var latitude = quebecStats[line].region_lat;
+        var longitude = quebecStats[line].region_long;
 
-          var latLong =  {lat: parseFloat(latitude), lng: parseFloat(longitude)};
+        var latLong =  {lat: parseFloat(latitude), lng: parseFloat(longitude)};
 
 
-          var cityCircle = new google.maps.Circle({
-              strokeColor: '#0008ff',
-              strokeOpacity: 0.8,
-              strokeWeight: 2,
-              fillColor: '#0008ff',
-              fillOpacity: 0.35,
-              map: map,
-              center: latLong,
-              radius: Math.sqrt(numberOfCases) * 100
-            });
-        }
+        var cityCircle = new google.maps.Circle({
+            strokeColor: '#0008ff',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#0008ff',
+            fillOpacity: 0.35,
+            map: map,
+            center: latLong,
+            radius: Math.sqrt(numberOfCases) * 100
+          });
+      }
+    };
 
-        for (line in ontarioStats) {
-        
+    function drawCirclesO(map){
+      for (line in ontarioStats){
         //set the variables 
         var numberOfCases = ontarioStats[line].NumberOfCases;
         var latitude = ontarioStats[line].Reporting_PHU_Latitude;
@@ -108,39 +105,32 @@
             center: latLong,
             radius: Math.sqrt(numberOfCases) * 100
         });
-        
+    
       }
+
+    };
 
     
 
-              // Try HTML5 geolocation.
-              if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
 
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
-            infoWindow.open(map);
-            map.setCenter(pos);
-          }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
-          });
-        } else {
-          // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
-        }
-      }
+      function initMap() {
 
-      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-                              'Error: The Geolocation service failed.' :
-                              'Error: Your browser doesn\'t support geolocation.');
-        infoWindow.open(map);
-      }
+        // Create the map.
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: {lat: 53.7609, lng: -98.8139},
+          mapTypeId: 'roadmap'
+        });
+
+        
+        
+
+        
+
+      };
+      
+    
+
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYK-dXBFgT2pX4-b8z0q3LLmLGCP75GNc&callback=initMap">

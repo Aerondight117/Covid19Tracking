@@ -1,0 +1,55 @@
+[09-Apr-2020 01:20:01 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '192.168.1.2:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:20:01 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '192.168.1.2:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:20:07 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '192.168.1.2:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:20:07 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '192.168.1.2:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:21:35 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '192.168.1.2:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:21:35 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '192.168.1.2:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:25:25 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '192.168.1.2:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:25:25 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '192.168.1.2:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:25:36 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '107.179.196.42:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:25:36 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '107.179.196.42:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:25:55 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '107.179.196.42:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:25:55 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '107.179.196.42:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:25:59 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '107.179.196.42:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:25:59 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '107.179.196.42:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:26:03 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '107.179.196.42:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:26:03 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '107.179.196.42:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:27:22 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '107.179.196.42:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:27:22 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '107.179.196.42:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:27:54 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '107.179.196.42:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:27:54 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '107.179.196.42:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:34:28 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '107.179.196.42:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:34:28 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '107.179.196.42:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:34:56 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '107.179.196.42:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:34:56 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '107.179.196.42:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:35:17 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '107.179.196.42:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:35:17 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '107.179.196.42:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:35:17 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '107.179.196.42:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:35:17 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '107.179.196.42:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:35:26 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '107.179.196.42:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:35:26 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '107.179.196.42:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:39:54 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '107.179.196.42:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:39:54 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '107.179.196.42:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:43:34 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '107.179.196.42:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:43:34 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '107.179.196.42:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:44:15 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '107.179.196.42:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 01:48:17 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '107.179.196.42:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 02:05:26 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '107.179.196.42:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 02:05:26 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '107.179.196.42:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 02:26:53 America/New_York] PHP Warning:  mysqli::__construct(): (HY000/2005): Unknown MySQL server host '107.179.196.42:3307' (-2) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 02:51:35 America/New_York] PHP Warning:  mysqli::__construct(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 02:51:35 America/New_York] PHP Warning:  mysqli::__construct(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 02:51:51 America/New_York] PHP Warning:  mysqli::__construct(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 02:51:51 America/New_York] PHP Warning:  mysqli::__construct(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 02:56:22 America/New_York] PHP Warning:  mysqli::__construct(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 02:56:22 America/New_York] PHP Warning:  mysqli::__construct(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 02:56:33 America/New_York] PHP Warning:  mysqli::__construct(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 02:56:33 America/New_York] PHP Warning:  mysqli::__construct(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 02:56:59 America/New_York] PHP Warning:  mysqli::__construct(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 02:59:13 America/New_York] PHP Warning:  mysqli::__construct(): (42000/1044): Access denied for user 'covicivy_sql'@'localhost' to database 'operationscovicivy_covidCasesInCanada' in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 03:02:21 America/New_York] PHP Warning:  mysqli::__construct(): (42000/1044): Access denied for user 'covicivy_sql'@'localhost' to database 'operationscovicivy_covidCasesInCanada' in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 03:03:11 America/New_York] PHP Warning:  mysqli::__construct(): (42000/1044): Access denied for user 'covicivy_sql'@'localhost' to database 'covicivy_covidCasesInCanada' in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 03:03:14 America/New_York] PHP Warning:  mysqli::__construct(): (42000/1044): Access denied for user 'covicivy_sql'@'localhost' to database 'covicivy_covidCasesInCanada' in /home/covicivy/public_html/config.php on line 10
+[09-Apr-2020 03:03:15 America/New_York] PHP Warning:  mysqli::__construct(): (42000/1044): Access denied for user 'covicivy_sql'@'localhost' to database 'covicivy_covidCasesInCanada' in /home/covicivy/public_html/config.php on line 10
+[11-Apr-2020 06:15:37 America/New_York] PHP Parse error:  syntax error, unexpected '$result' (T_VARIABLE) in /home/covicivy/public_html/updateData.php on line 9
+[11-Apr-2020 06:15:45 America/New_York] PHP Parse error:  syntax error, unexpected '$result' (T_VARIABLE) in /home/covicivy/public_html/updateData.php on line 9

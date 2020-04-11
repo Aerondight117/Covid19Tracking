@@ -15,12 +15,13 @@ with open('conposcovidloc.csv', 'wb') as handle:
     for block in response.iter_content(1024):
         handle.write(block)
 
-conn = sqlite3.connect('ontarioCovidResults.db')
+conn = sqlite3.connect('CanadaCovidResults.db')
 c = conn.cursor()
 
 c.execute("DROP TABLE IF EXISTS `CovidCasesOntario`")
-
+c.execute("CREATE VIEW IF NOT EXISTS `CovidCasesCanada` AS SELECT COUNT(`ROW_ID`) AS 'NumberOfCases', Reporting_PHU,Reporting_PHU_Latitude,Reporting_PHU_Longitude FROM `CovidCasesOntario` GROUP BY `Reporting_PHU` ORDER BY COUNT(`ROW_ID`) DESC ")
 #create a table and store the data
+
 c.execute("""CREATE TABLE `CovidCasesOntario` (
   `ROW_ID` int(4) DEFAULT NULL,
   `ACCURATE_EPISODE_DATE` varchar(10) DEFAULT NULL,
@@ -37,7 +38,6 @@ c.execute("""CREATE TABLE `CovidCasesOntario` (
   `Reporting_PHU_Longitude` decimal(11,8) DEFAULT NULL
 )""")
 
-
 reader = csv.reader(open('conposcovidloc.csv', "r"))
 for row in reader:
     to_db=[]
@@ -46,4 +46,7 @@ for row in reader:
     c.execute("""INSERT INTO CovidCasesOntario (ROW_ID,ACCURATE_EPISODE_DATE,Age_Group,CLIENT_GENDER,CASE_ACQUISITIONINFO,OUTCOME1,Reporting_PHU,Reporting_PHU_Address,
                 Reporting_PHU_City,Reporting_PHU_Postal_Code,Reporting_PHU_Website,Reporting_PHU_Latitude,Reporting_PHU_Longitude) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?);""", to_db)
     #cur.execute("CREATE INDEX location_idx ON lookup(location)" )
+
 conn.commit()
+for row in c.execute ("SELECT * FROM CovidCasesCanada"):
+    print(row)
