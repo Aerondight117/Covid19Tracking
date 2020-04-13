@@ -89,8 +89,8 @@
       for (line in ontarioStats){
         //set the variables 
         var numberOfCases = ontarioStats[line].NumberOfCases;
-        var latitude = ontarioStats[line].Reporting_PHU_Latitude;
-        var longitude = ontarioStats[line].Reporting_PHU_Longitude;
+        var latitude = ontarioStats[line].Latitude;
+        var longitude = ontarioStats[line].Longitude;
 
         var latLong =  {lat: parseFloat(latitude), lng: parseFloat(longitude)};
 
