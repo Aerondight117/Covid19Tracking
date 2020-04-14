@@ -31,7 +31,7 @@ c.execute("DELETE FROM `CovidCasesOntario`")
 c.execute("DROP VIEW IF EXISTS `CovidCases`")
 
 
-c.execute("CREATE VIEW IF NOT EXISTS `CovidCases` AS SELECT COUNT(`ROW_ID`) AS 'NumberOfCases', Reporting_PHU,Reporting_PHU_City,Reporting_PHU_Latitude,Reporting_PHU_Longitude FROM `CovidCasesOntario` GROUP BY `Reporting_PHU` ORDER BY COUNT(`ROW_ID`) DESC ")
+c.execute("CREATE VIEW IF NOT EXISTS `CovidCases` AS SELECT COUNT(`ROW_ID`) AS 'NumberOfCases', Reporting_PHU,Reporting_PHU_City,Reporting_PHU_Latitude,Reporting_PHU_Longitude FROM `CovidCasesOntario` GROUP BY `Reporting_PHU_City` ORDER BY COUNT(`ROW_ID`) DESC ")
 #create a table and store the data
 
 c.execute("""CREATE TABLE IF NOT EXISTS `CovidCasesOntario` (

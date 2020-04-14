@@ -8,15 +8,7 @@ import pymysql
 from sshtunnel import SSHTunnelForwarder
 
 
-
-
-
-
-
-
-
-
-url = "https://www.quebec.ca/en/health/health-issues/a-z/2019-coronavirus/situation-coronavirus-in-quebec/"
+url = "http://www.bccdc.ca/health-info/diseases-conditions/covid-19/case-counts-press-statements"
 
 # get the csv
 response = requests.get(url, stream=True)
@@ -25,34 +17,11 @@ response = requests.get(url, stream=True)
 response.raise_for_status()
 soup = BeautifulSoup(response.text, 'html.parser')
 
-rows = soup.find(class_="contenttable").find_all("p")
+rows = soup.find(class_="content-body").find_all('li')
 
 
 
 
-
-
-def first2(s):
-    return s[:2]
-
-
-def intTryParse(value):
-    try:
-        return int(value), True
-    except ValueError:
-        return value, False
-
-def parseData(rows):
-    
-    regionData = []
-    i = 3
-
-    if rows[0].getText() == "Regions":
-        
-        while i < len(rows):
-            regionData.append({ 'id':first2( rows[i].getText() ) ,  'regionName': rows[i].getText() , 'numberCases': (re.sub(r"\s+", "", rows[i + 1].getText(), flags=re.UNICODE))})
-            i+=2
-        return regionData
 
 def updateDatabase(SSHTunnelForwarder, pymysql, parsedData):
     
@@ -74,7 +43,7 @@ def updateDatabase(SSHTunnelForwarder, pymysql, parsedData):
             conn = pymysql.connect(host='127.0.0.1', user=sql_username,
             passwd=sql_password, db=sql_main_database,
             port=tunnel.local_bind_port)
-        
+            i=3
             try:
 
 
@@ -82,23 +51,18 @@ def updateDatabase(SSHTunnelForwarder, pymysql, parsedData):
         
                     
 
-                    for row in parsedData:
-                        if intTryParse(row.get('id')):
-                            varin = (int(row.get('numberCases')), int(row.get('id')))
-                            print(varin)
-                            sql = """UPDATE CovidCasesQuebec SET `number_of_cases` = ' %s' WHERE (`id` = ' %s');"""
-                            cursor.execute(sql,  varin )
-                            conn.commit()
+                    while i < 8 and i < len(rows):
+                        row = rows[i].get_text()
+
+                        datain = (row[:row.find('i')].strip() , row[row.find('n') +1:].strip())
+                        
+                        print (datain)
+                        sql = """UPDATE CovidCasesBC SET `NumberOfCases` = %s WHERE (`RegionName` = %s);"""
+                        cursor.execute(sql,  datain)
+                        conn.commit()
+                        i += 1
             finally:
                 conn.close()
 
 
-updateDatabase(SSHTunnelForwarder, pymysql, parseData(rows))
-
-
-
-
-
-
-
-
+updateDatabase(SSHTunnelForwarder, pymysql,rows)

@@ -24,73 +24,33 @@
   </head>
 
   <body>
-    <div id = "title">Covid Spread In Canada</div>
+    
     <div id="map"></div>
     <script>
 
-    var url1 = 'ontario.php';
-    var url2 = 'quebec.php';
+    var url = 'canada.php';
     var map;
 
 
 
-    var ontarioStats = getStatsO(url1);
-    
-
-    var quebecStats = getStatsQ(url2);
-
-
-    function getStatsQ(url){
+    var canadaStats = getStats(url);
+  
+    function getStats(url){
       fetch(url)
         .then(res => res.json())
         .then((out) => {
-          quebecStats = out;
-            drawCirclesQ(map);
+          canadaStats = out;
+            drawCircles(map);
           })
       .catch(err => { throw err });
     };
 
-    function getStatsO(url){
-      fetch(url)
-        .then(res => res.json())
-        .then((out) => {
-            ontarioStats = out;
-            drawCirclesO(map);
-          })
-      .catch(err => { throw err });
-    };
-
-    function drawCirclesQ(map){
-      for (line in quebecStats) {
-        
-          
+    function drawCircles(map){
+      for (line in canadaStats){
         //set the variables 
-        var numberOfCases = quebecStats[line].number_of_cases;
-        var latitude = quebecStats[line].region_lat;
-        var longitude = quebecStats[line].region_long;
-
-        var latLong =  {lat: parseFloat(latitude), lng: parseFloat(longitude)};
-
-
-        var cityCircle = new google.maps.Circle({
-            strokeColor: '#0008ff',
-            strokeOpacity: 0.8,
-            strokeWeight: 2,
-            fillColor: '#0008ff',
-            fillOpacity: 0.35,
-            map: map,
-            center: latLong,
-            radius: Math.sqrt(numberOfCases) * 100
-          });
-      }
-    };
-
-    function drawCirclesO(map){
-      for (line in ontarioStats){
-        //set the variables 
-        var numberOfCases = ontarioStats[line].NumberOfCases;
-        var latitude = ontarioStats[line].Latitude;
-        var longitude = ontarioStats[line].Longitude;
+        var numberOfCases = canadaStats[line].NumberOfCases;
+        var latitude = canadaStats[line].Latitude;
+        var longitude = canadaStats[line].Longitude;
 
         var latLong =  {lat: parseFloat(latitude), lng: parseFloat(longitude)};
 
@@ -113,14 +73,14 @@
     
 
 
-      function initMap() {
+    function initMap() {
 
-        // Create the map.
-        map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: {lat: 53.7609, lng: -98.8139},
-          mapTypeId: 'roadmap'
-        });
+      // Create the map.
+      map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 4,
+        center: {lat: 53.7609, lng: -98.8139},
+        mapTypeId: 'roadmap'
+      });
 
         
         
@@ -129,12 +89,13 @@
 
       };
       
-    
 
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYK-dXBFgT2pX4-b8z0q3LLmLGCP75GNc&callback=initMap">
     </script>
+
+    <div id = "title">Covid Spread In Canada</div>
 
     <div id = "information">
 
@@ -144,8 +105,13 @@
     
     </br>
     Ontario
-    
+    <?php
+    echo '<ul>'
+    for (line in canadaStats){
+      echo line;
+    }
 
+    ?>
     </br>
     https://data.ontario.ca/dataset/f4112442-bdc8-45d2-be3c-12efae72fb27/resource/4f39b02b-47fe-4e66-95b6-e6da879c6910
     
@@ -155,7 +121,11 @@
     </br>
     https://www.quebec.ca/en/health/health-issues/a-z/2019-coronavirus/situation-coronavirus-in-quebec/
     </br>
-
+    
+    BC
+    </br>
+    http://www.bccdc.ca/health-info/diseases-conditions/covid-19/case-counts-press-statements
+    </br>
 
       
     <div>

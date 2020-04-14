@@ -2,7 +2,7 @@
 // Include config file
 require_once "config.php";
         
-if ($result =  $mysqli-> query("SELECT * FROM covicivy_covidCasesInCanada.CovidCasesQuebec")) {
+if ($result =  $mysqli-> query("SELECT * FROM covicivy_covidCasesInCanada.CasesInCanada")) {
  
   while($row = $result->fetch_array(MYSQLI_ASSOC)) {
     $myArray[] = $row;
