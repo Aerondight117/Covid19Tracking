@@ -130,7 +130,7 @@ function initMap() {
       longitude = -90.4794775;
       latlng = {lat: parseFloat(latitude), lng: parseFloat(longitude)};
       map.setCenter(latlng);
-      map.setZoom(5);
+      map.setZoom(6);
     };
   
     function getCanada(){

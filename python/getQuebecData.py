@@ -8,23 +8,18 @@ import pymysql
 from sshtunnel import SSHTunnelForwarder
 
 
-
-
-
-
-
-
-
-
 url = "https://www.quebec.ca/en/health/health-issues/a-z/2019-coronavirus/situation-coronavirus-in-quebec/"
 
-# get the csv
+# get the website
 response = requests.get(url, stream=True)
-# Throw an error for bad status codes
 
+# Throw an error for bad status codes
 response.raise_for_status()
+
+#parse the response for html
 soup = BeautifulSoup(response.text, 'html.parser')
 
+# narrow down the amount of code by parsing for the main content and searching for p
 rows = soup.find(class_="contenttable").find_all("p")
 
 
@@ -86,12 +81,12 @@ def updateDatabase(SSHTunnelForwarder, pymysql, parsedData):
                     
 
                     for row in parsedData:
-                        if intTryParse(row.get('id')):
-                            varin = (int(row.get('numberCases')), int(row.get('id')))
-                            print(varin)
-                            sql = """UPDATE CovidCasesQuebec SET `NumberOfCases` = ' %s' WHERE (`ID` = ' %s');"""
-                            cursor.execute(sql,  varin )
-                            conn.commit()
+                        
+                        varin = (int(row.get('numberCases')), int(row.get('id')))
+                        print(varin)
+                        sql = """UPDATE CovidCasesQuebec SET `NumberOfCases` = ' %s' WHERE (`ID` = ' %s');"""
+                        cursor.execute(sql,  varin )
+                        conn.commit()
             finally:
                 conn.close()
 
