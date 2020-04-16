@@ -90,7 +90,7 @@ with SSHTunnelForwarder(
     
         try:
             with conn.cursor() as cursor:
-                cursor.execute("DELETE FROM CovidCases")
+                cursor.execute("DELETE FROM CovidCasesOntario")
                 
         finally:
             conn.commit()
@@ -104,7 +104,7 @@ with SSHTunnelForwarder(
 
                 for row in rows:  
                     
-                    sql = """INSERT INTO CovidCases(NumberOfCases,RegionName,ProvinceName,TownName,Latitude,Longitude) VALUES (%s,%s, 'Ontario', %s, %s,%s);"""
+                    sql = """INSERT INTO CovidCasesOntario (NumberOfCases,RegionName,ProvinceName,TownName,Latitude,Longitude) VALUES (%s,%s, 'Ontario', %s, %s,%s);"""
                     cursor.execute(sql, row )
                     print(row)
                     conn.commit()

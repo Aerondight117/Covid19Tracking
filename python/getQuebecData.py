@@ -38,6 +38,7 @@ def first2(s):
 
 def intTryParse(value):
     try:
+        print (int(value))
         return int(value), True
     except ValueError:
         return value, False
@@ -48,9 +49,12 @@ def parseData(rows):
     i = 3
 
     if rows[0].getText() == "Regions":
-        
-        while i < len(rows):
-            regionData.append({ 'id':first2( rows[i].getText() ) ,  'regionName': rows[i].getText() , 'numberCases': (re.sub(r"\s+", "", rows[i + 1].getText(), flags=re.UNICODE))})
+            
+
+        while i < 38 and i < len(rows):
+            row = rows[i].get_text()
+            print (str(i) +" " + row)
+            regionData.append({ 'id':first2( row ) ,  'regionName': row , 'numberCases': (re.sub(r"\s+", "", rows[i + 1].getText(), flags=re.UNICODE))})
             i+=2
         return regionData
 
@@ -74,7 +78,6 @@ def updateDatabase(SSHTunnelForwarder, pymysql, parsedData):
             conn = pymysql.connect(host='127.0.0.1', user=sql_username,
             passwd=sql_password, db=sql_main_database,
             port=tunnel.local_bind_port)
-        
             try:
 
 
@@ -86,7 +89,7 @@ def updateDatabase(SSHTunnelForwarder, pymysql, parsedData):
                         if intTryParse(row.get('id')):
                             varin = (int(row.get('numberCases')), int(row.get('id')))
                             print(varin)
-                            sql = """UPDATE CovidCasesQuebec SET `number_of_cases` = ' %s' WHERE (`id` = ' %s');"""
+                            sql = """UPDATE CovidCasesQuebec SET `NumberOfCases` = ' %s' WHERE (`ID` = ' %s');"""
                             cursor.execute(sql,  varin )
                             conn.commit()
             finally:

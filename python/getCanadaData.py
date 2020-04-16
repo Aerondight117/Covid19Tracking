@@ -1,25 +1,37 @@
+
+
 import requests 
 from contextlib import closing
 import csv
 import sqlite3
-from bs4 import BeautifulSoup
-import re
+import pandas as pd
 import pymysql
 from sshtunnel import SSHTunnelForwarder
 
 
-url = "http://www.bccdc.ca/health-info/diseases-conditions/covid-19/case-counts-press-statements"
+#csv file download link
+url = "https://health-infobase.canada.ca/src/data/covidLive/covid19.csv"
 
 # get the csv
 response = requests.get(url, stream=True)
+
 # Throw an error for bad status codes
-
 response.raise_for_status()
-soup = BeautifulSoup(response.text, 'html.parser')
 
-rows = soup.find(class_="content-body").find_all('li')
+#save the file
+with open('covid19.csv', 'wb') as handle:
+    for block in response.iter_content(1024):
+        handle.write(block)
 
-def updateDatabase(SSHTunnelForwarder, pymysql, parsedData):
+rows = []
+reader = csv.reader(open('covid19.csv', "r"))
+
+parsedData = []
+
+for row in reader:
+    rows.append(row)
+
+def updateDatabase(SSHTunnelForwarder, pymysql):
     
     sql_hostname = '127.0.0.1'
     sql_username = 'covicivy'
@@ -39,29 +51,24 @@ def updateDatabase(SSHTunnelForwarder, pymysql, parsedData):
             conn = pymysql.connect(host='127.0.0.1', user=sql_username,
             passwd=sql_password, db=sql_main_database,
             port=tunnel.local_bind_port)
-            i=3
+        
+
             try:
 
 
                 with conn.cursor() as cursor:
         
-                    
+                    i = len(rows) - 15
 
-                    while i < 8 and i < len(rows):        
-
-                        row = rows[i].get_text()
-
-                        datain = (row[:row.find('i')].strip() , row[row.find('n') +1:].strip())
-                        
-                        print (datain)
-                        sql = """UPDATE CovidCasesBC SET `NumberOfCases` = %s WHERE (`RegionName` = %s);"""
-                        cursor.execute(sql,  datain)
+                    while i < len(rows):
+                        row = rows[i]
+                        dataIn = (row[1], row[4], row[6],row[1],)
+                        print(row)
+                        sql = """Update CovidCasesCanada SET RegionName = %s,NumberOfCases = %s,Deaths= %s WHERE RegionName = %s;"""
+                        cursor.execute(sql,  dataIn )
                         conn.commit()
-                        i += 1
-                        
+                        i+=1
             finally:
                 conn.close()
-                print ("Done")
-
-
-updateDatabase(SSHTunnelForwarder, pymysql,rows)
+    
+updateDatabase(SSHTunnelForwarder, pymysql)
