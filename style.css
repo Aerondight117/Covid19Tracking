@@ -1,14 +1,10 @@
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
        #map {
-        height: 70%;
+        height: 60%;
       }
       /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
+
 
 #canada{
 }
@@ -56,15 +52,28 @@
     vertical-align:top;
 
 
-    margin: 20px;
-    padding: 20px;
+    margin: 10px;
+    padding: 10px;
     background-color: rgb(19, 19, 19);
     color: honeydew;
-    width:200px;
-    height: 175px;
+    width: 200px;
+    height: 185px;
 
+}
+
+.stat:hover {
+    background-color: rgb(65, 65, 65);
 }
 
 #navigation{
     height: 30%;
+}
+
+.regionName{
+    padding: 10px;
+    height: 84px;
+}
+
+.regionStats{
+    
 }

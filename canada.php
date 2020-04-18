@@ -2,10 +2,8 @@
 // Include config file
 require_once "config.php";
 
-$myJson;
-$regionData;
 
-if ($result =  $mysqli-> query("SELECT * FROM covicivy_covidCasesInCanada.CasesInCanada")) {
+if ($result =  $mysqli-> query("SELECT * FROM covicivy_covidCasesInCanada.CovidCasesInCanadaWithMissingData")) {
 
   while($row = $result->fetch_array(MYSQLI_ASSOC)) {
     $myArray[] = $row;

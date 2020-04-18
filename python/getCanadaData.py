@@ -62,9 +62,9 @@ def updateDatabase(SSHTunnelForwarder, pymysql):
 
                     while i < len(rows):
                         row = rows[i]
-                        dataIn = (row[1], row[4], row[6],row[1],)
+                        dataIn = (row[1], row[4], row[6],row[8],row[1])
                         print(row)
-                        sql = """Update CovidCasesCanada SET RegionName = %s,NumberOfCases = %s,Deaths= %s WHERE RegionName = %s;"""
+                        sql = """Update CovidCasesCanada SET RegionName = %s,NumberOfCases = %s,Deaths= %s,NumberTested= %s WHERE RegionName = %s;"""
                         cursor.execute(sql,  dataIn )
                         conn.commit()
                         i+=1
