@@ -8,16 +8,51 @@ import pymysql
 from sshtunnel import SSHTunnelForwarder
 
 
-url = "http://www.bccdc.ca/health-info/diseases-conditions/covid-19/case-counts-press-statements"
+url = "http://www.bccdc.ca/Health-Info-Site/Documents/BCCDC_COVID19_Dashboard_Case_Details.csv"
 
 # get the csv
 response = requests.get(url, stream=True)
+
 # Throw an error for bad status codes
-
 response.raise_for_status()
-soup = BeautifulSoup(response.text, 'html.parser')
 
-rows = soup.find(class_="content-body").find_all('li')
+#save the file
+with open('covidCasesBC.csv', 'wb') as handle:
+    for block in response.iter_content(1024):
+        handle.write(block)
+
+#connect to sqlite DB
+connection = sqlite3.connect('CanadaCovidResults.db')
+c = connection.cursor()
+
+#remove any old records 
+c.execute("DELETE FROM `CovidCasesBC`")
+
+c.execute("DROP VIEW IF EXISTS `CovidCasesBCView`")
+
+
+c.execute("CREATE VIEW IF NOT EXISTS `CovidCasesBCView` AS SELECT COUNT(ReportedDate) as `NumberOfCases`,RegionName FROM `CovidCasesBC` GROUP BY `RegionName` ORDER BY NumberOfCases DESC ")
+#create a table and store the data
+
+c.execute("""CREATE TABLE IF NOT EXISTS `CovidCasesBC` (
+  `ReportedDate` varchar(10) DEFAULT NULL,
+  `RegionName` varchar(50) DEFAULT NULL
+)""")
+
+reader = csv.reader(open('covidCasesBC.csv', "r"))
+next(reader)
+for row in reader:
+    to_db=((row[0],row[1]))
+    
+    c.execute("""INSERT INTO CovidCasesBC (ReportedDate,`RegionName`) VALUES (?, ?);""", to_db)
+    
+
+    
+connection.commit()
+
+rows = c.execute("SELECT * FROM CovidCasesBCView").fetchall()
+
+
 
 def updateDatabase(SSHTunnelForwarder, pymysql, parsedData):
     
@@ -39,7 +74,7 @@ def updateDatabase(SSHTunnelForwarder, pymysql, parsedData):
             conn = pymysql.connect(host='127.0.0.1', user=sql_username,
             passwd=sql_password, db=sql_main_database,
             port=tunnel.local_bind_port)
-            i=3
+
             try:
 
 
@@ -47,17 +82,15 @@ def updateDatabase(SSHTunnelForwarder, pymysql, parsedData):
         
                     
 
-                    while i < 8 and i < len(rows):        
+                    for row in rows:        
 
-                        row = rows[i].get_text()
-
-                        datain = (row[:row.find('i')].strip() , row[row.find('n') +1:].strip())
+                       
                         
-                        print (datain)
-                        sql = """UPDATE CovidCasesBC SET `NumberOfCases` = %s WHERE (`RegionName` = %s);"""
-                        cursor.execute(sql,  datain)
+                        print (row)
+                        sql = """UPDATE CovidCasesBC SET `NumberOfCases` = %s WHERE (`RegionName` = CONCAT(%s, ' Health'));"""
+                        cursor.execute(sql,  row)
                         conn.commit()
-                        i += 1
+
                         
             finally:
                 conn.close()
