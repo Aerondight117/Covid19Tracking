@@ -14,7 +14,6 @@
 #information{
     float:left;
     margin: 20px;
-    height:30%
 }
 #stats{
 
@@ -30,8 +29,7 @@
 }
 #regionLinks div{
     display: inline-block;
-    max-height:  100px;
-    max-width: 50%;
+    
 
 }
 
@@ -65,15 +63,19 @@
     background-color: rgb(65, 65, 65);
 }
 
-#navigation{
-    height: 30%;
-}
 
 .regionName{
     padding: 10px;
-    height: 84px;
+
 }
 
-.regionStats{
-    
+#dataSources{
+    padding: 10px;
+    margin: 10px;
+    text-align:left;
+    font-size: 15;
+}
+
+#regionName{
+    font-size: 18;
 }

@@ -2,7 +2,7 @@
 var url = 'canada.php';
 var regionStats;
 var canadaStats;
-var cityCircles;
+
 var map;
 
 
@@ -22,10 +22,7 @@ async function getStats(url){
   return response;
 }
 
-getStats(url)
-    .then((data) => {
-      displayCases();
-    });
+
 
 function setstats(data){
     regionStats = data.region;
@@ -49,7 +46,17 @@ function initMap() {
         });
     
     
+        var div = document.getElementById("dom-target");
+        for (line in div){
+          console.log(line);
+        }
 
+        getStats(url)
+    .then((data) => {
+      displayCases();
+    });
+
+    
 
 }
 
@@ -58,7 +65,7 @@ function displayCases(){
         
   
     var row = regionStats[i];
-    
+    var province = row.ProvinceName;
     var regionName = row.RegionName;
     var numberOfCases = row.NumberOfCases;
     var latitude = row.Latitude;
@@ -74,12 +81,23 @@ function displayCases(){
           fillOpacity: 0.35,
           map: map,
           center: latLong,
-          radius: Math.sqrt(row.NumberOfCases) * 250
+          radius: Math.sqrt(row.NumberOfCases) * 250,
+          name: regionName,
+          numberOfCases: numberOfCases,
+          province:province
       });
+
+      google.maps.event.addListener(cityCircle, 'click', function(ev) {
+        map.panTo(this.center);       
+        html = "<div id= 'region'>"+ this.province+ " , "+this.name+"</div>"+"<div id= 'cases'>Positive Cases: "+ this.numberOfCases+"</div>";
+
+        document.getElementById("regionName").innerHTML = html;
+
+    });
+
     }
   }
   }
-
 
 
   function fillStats(){
@@ -98,35 +116,3 @@ function displayCases(){
 
 
   
-  function getOntario(){
-      latitude = 50.2434053;
-      longitude = -90.4794775;
-      latlng = {lat: parseFloat(latitude), lng: parseFloat(longitude)};
-      map.setCenter(latlng);
-      map.setZoom(6);
-    }
-  
-    function getCanada(){
-      latitude = 53.7609;
-      longitude = -90.8139;
-      latlng = {lat: parseFloat(latitude), lng: parseFloat(longitude)};
-      map.setCenter(latlng);
-      map.setZoom(4);
-    }
-
-    function getQuebec(){
-      latitude = 53.4737266;
-      longitude = -77.3971109;
-      latlng = {lat: parseFloat(latitude), lng: parseFloat(longitude)};
-      map.setCenter(latlng);
-      map.setZoom(5);
-    }
-
-    function getBC(){
-      latitude = 53.7911033
-      longitude = -135.5095492;
-      latlng = {lat: parseFloat(latitude), lng: parseFloat(longitude)};
-      map.setCenter(latlng);
-      map.setZoom(5);
-    }
-

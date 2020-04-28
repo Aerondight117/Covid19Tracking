@@ -22,6 +22,11 @@ if ($result =  $mysqli-> query("SELECT * FROM covicivy_covidCasesInCanada.CovidC
   }
   
 
-echo json_encode(array('region' => $myArray,'canada' =>  $myArray2))
+
+  
+
+
+
+echo json_encode(array('region' => $myArray,'canada' =>  $myArray2));
     
  ?>

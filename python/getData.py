@@ -6,3 +6,5 @@ import getQuebecData
 import getSaskatchewanData
 import getNovaScotia
 import getPEIData
+import getManitobaData
+import getNLData

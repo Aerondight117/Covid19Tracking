@@ -87,19 +87,13 @@ with SSHTunnelForwarder(
         conn = pymysql.connect(host='127.0.0.1', user=sql_username,
         passwd=sql_password, db=sql_main_database,
         port=tunnel.local_bind_port)
-    
+
+
         try:
+
+
             with conn.cursor() as cursor:
                 cursor.execute("DELETE FROM CovidCasesOntario")
-                
-        finally:
-            conn.commit()
-
-        try:
-
-
-            with conn.cursor() as cursor:
-    
                 
 
                 for row in rows:  

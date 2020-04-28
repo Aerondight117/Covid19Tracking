@@ -25,10 +25,8 @@ soup = BeautifulSoup(response.text, 'html.parser')
 # narrow down the amount of code by parsing for the main content and searching for p
 rows = soup.find(class_='field-items').find_all("td")
 
-for row in rows:
-    print(row)
 
-lenthOfRows =len(rows);
+lenthOfRows =len(rows)
 parsedData = []
 kingsRow = rows[lenthOfRows-5].get_text().strip()
 queensRow = rows[lenthOfRows-3].get_text().strip()
@@ -38,8 +36,7 @@ parsedData.append(( getNumber(kingsRow),'Kings'))
 parsedData.append((getNumber(queensRow),'Queens'))
 parsedData.append((getNumber(princeRow),'Prince'))
 
-for row in parsedData:
-    print(row)
+
 
 
 def updateDatabase(SSHTunnelForwarder):

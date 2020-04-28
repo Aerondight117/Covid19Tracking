@@ -39,8 +39,6 @@ parsedData.append((int(row[8]),'Northern'))
 parsedData.append((int(row[9]),'Eastern'))
 parsedData.append((int(row[10]),'Central'))
 
-for row in parsedData:
-    print(row)
 
 def updateDatabase(SSHTunnelForwarder):
     
