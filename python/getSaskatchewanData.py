@@ -15,31 +15,26 @@ def parseRegion(string):
     else:
         return string
 
-url = "https://www.saskatchewan.ca/government/health-care-administration-and-provider-resources/treatment-procedures-and-guidelines/emerging-public-health-issues/2019-novel-coronavirus/cases-and-risk-of-covid-19-in-saskatchewan"
+url = "https://dashboard.saskatchewan.ca/export/cases/1174.csv"
 
-# get the website
 response = requests.get(url, stream=True)
 
 # Throw an error for bad status codes
 response.raise_for_status()
 
-#parse the response for html
-soup = BeautifulSoup(response.text, 'html.parser')
+#save the file
+with open('saskatchewan.csv', 'wb') as handle:
+    for block in response.iter_content(1024):
+        handle.write(block)
 
-# narrow down the amount of code by parsing for the main content and searching for p
-rows = soup.find(class_='compacttable').find_all("tr")
+rows = []
+reader = csv.reader(open('saskatchewan.csv', "r"))
 
 parsedData = []
-i = 1
-while i < len(rows)- 1:
-    
-    rowText= (rows[i].get_text())
 
-    row = rowText.split('\n')
-    parsedData.append((row[2].strip(),parseRegion(row[1])))
+for row in reader:
+    rows.append(row)
 
-    i+=1
-    
 
 
 
@@ -63,22 +58,21 @@ def updateDatabase(SSHTunnelForwarder):
             conn = pymysql.connect(host='127.0.0.1', user=sql_username,
             passwd=sql_password, db=sql_main_database,
             port=tunnel.local_bind_port)
-            
             try:
 
 
                 with conn.cursor() as cursor:
         
-                    
+                    i = len(rows) - 7
 
-                    for row in parsedData:        
-
-                        print (row)
+                    while i < len(rows) -1:
+                        row = rows[i]
+                        print(parseRegion(row[1]),row[4])
                         sql = """UPDATE CovidCasesSaskatchewan SET `NumberOfCases` = %s WHERE (`RegionName` = %s);"""
-                        cursor.execute(sql,  row)
+                        cursor.execute(sql, (row[4],parseRegion(row[1])))
                         conn.commit()
-
-                        
+                        i+=1
+                                       
             finally:
                 conn.close()
                 print ("Done")

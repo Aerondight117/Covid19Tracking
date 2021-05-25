@@ -41,6 +41,7 @@ c.execute("""CREATE TABLE IF NOT EXISTS `CovidCasesOntario` (
   `CLIENT_GENDER` varchar(11) DEFAULT NULL,
   `CASE_ACQUISITIONINFO` varchar(27) DEFAULT NULL,
   `OUTCOME1` varchar(12) DEFAULT NULL,
+  `OUTBREAK` varchar(12) DEFAULT NULL,
   `Reporting_PHU` varchar(56) DEFAULT NULL,
   `Reporting_PHU_Address` varchar(30) DEFAULT NULL,
   `Reporting_PHU_City` varchar(16) DEFAULT NULL,
@@ -56,8 +57,8 @@ for row in reader:
     to_db=[]
     for r in row:
         to_db += [r]
-    c.execute("""INSERT INTO CovidCasesOntario (ROW_ID,ACCURATE_EPISODE_DATE,Age_Group,CLIENT_GENDER,CASE_ACQUISITIONINFO,OUTCOME1,Reporting_PHU,Reporting_PHU_Address,
-                Reporting_PHU_City,Reporting_PHU_Postal_Code,Reporting_PHU_Website,Reporting_PHU_Latitude,Reporting_PHU_Longitude) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?);""", to_db)
+    c.execute("""INSERT INTO CovidCasesOntario (ROW_ID,ACCURATE_EPISODE_DATE,Age_Group,CLIENT_GENDER,CASE_ACQUISITIONINFO,OUTCOME1,OUTBREAK,Reporting_PHU,Reporting_PHU_Address,
+                Reporting_PHU_City,Reporting_PHU_Postal_Code,Reporting_PHU_Website,Reporting_PHU_Latitude,Reporting_PHU_Longitude) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?, ?);""", to_db)
     
 
     

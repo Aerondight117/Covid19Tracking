@@ -1,15 +1,17 @@
 
-var url = 'canada.php';
+var url = 'https://covidtoday.ca/canada.php';
 var regionStats;
 var canadaStats;
-
 var map;
 
 
+// fix formating on case counts
 function formatNumber(num) {
   return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 }
 
+
+// function to get data from php file using ajax
 async function getStats(url){
     const response = await fetch(url)
     .then(response => response.json())
@@ -23,13 +25,14 @@ async function getStats(url){
 }
 
 
-
+// map the data to regions to these arrays
 function setstats(data){
     regionStats = data.region;
     canadaStats = data.canada;
 }
 
 
+// google maps initialization
 
 function initMap() {
 
@@ -60,8 +63,12 @@ function initMap() {
 
 }
 
+// This function generates the data for google maps and provincial breakdowns
+
 function displayCases(){
-    for (i = 0; i < regionStats.length; i++){
+  
+  // loop through region array
+  for (i = 0; i < regionStats.length; i++){
         
   
     var row = regionStats[i];
@@ -71,6 +78,7 @@ function displayCases(){
     var latitude = row.Latitude;
     var longitude = row.Longitude;
   
+    // if case count is grater than 0 generate the data point on the map
     if (numberOfCases>0){
       var latLong = {lat: parseFloat(row.Latitude), lng: parseFloat(row.Longitude)};
        cityCircle = new google.maps.Circle({
@@ -84,8 +92,10 @@ function displayCases(){
           radius: Math.sqrt(row.NumberOfCases) * 250,
           name: regionName,
           numberOfCases: numberOfCases,
-          province:province
+          province:province,
+          
       });
+      // If a data point is clicked, display the data point data
 
       google.maps.event.addListener(cityCircle, 'click', function(ev) {
         map.panTo(this.center);       
@@ -99,13 +109,14 @@ function displayCases(){
   }
   }
 
+// this function creates the provincial stats
 
   function fillStats(){
     i = 0;
     
     while(i < canadaStats.length){
       row = canadaStats[i];
-      html = "<div id= '" +row.RegionName + "' onclick='(map.setCenter({lat: " + parseFloat(row.Latitude) + ",  lng: " + parseFloat(row.Longitude) + "}, map.setZoom("+ row.zoomLevel+")) ) ' class='stat'><div class='regionName'> <h4>" + row.RegionName +  "</h4> </div>  <div id = 'regionStats'> Cases: " + formatNumber(row.NumberOfCases)+ "<br> Deaths: " + formatNumber(row.Deaths) + "<br> Tested: " + formatNumber(row.NumberTested) + "</div></div>";
+      html = "<div id= '" +row.RegionName + "' onclick='(map.setCenter({lat: " + parseFloat(row.Latitude) + ",  lng: " + parseFloat(row.Longitude) + "}, map.setZoom("+ row.zoomLevel+")) ) ' class='stat'><div class='regionName'> <h4>" + row.RegionName +  "</h4> </div>  <div id = 'regionStats'> New Cases: " + formatNumber(row.NewCases)+ " <br> Cases: " + formatNumber(row.NumberOfCases)+ "<br> Deaths: " + formatNumber(row.Deaths) + "<br> Tested: " + formatNumber(row.NumberTested) + "</div></div>";
 
       document.getElementById("stats").innerHTML += html;
 

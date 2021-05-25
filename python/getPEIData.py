@@ -28,16 +28,15 @@ rows = soup.find(class_='field-items').find_all("td")
 
 lenthOfRows =len(rows)
 parsedData = []
-kingsRow = rows[lenthOfRows-5].get_text().strip()
-queensRow = rows[lenthOfRows-3].get_text().strip()
-princeRow = rows[lenthOfRows-1].get_text().strip()
-
-parsedData.append(( getNumber(kingsRow),'Kings'))
-parsedData.append((getNumber(queensRow),'Queens'))
-parsedData.append((getNumber(princeRow),'Prince'))
 
 
+kingsRow = rows[lenthOfRows-5].text.strip()
+queensRow = rows[lenthOfRows-3].text.strip()
+princeRow = rows[lenthOfRows-1].text.strip()
 
+parsedData.append((kingsRow,'Kings'))
+parsedData.append((queensRow,'Queens'))
+parsedData.append((princeRow,'Prince'))
 
 def updateDatabase(SSHTunnelForwarder):
     
